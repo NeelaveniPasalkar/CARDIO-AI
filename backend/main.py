@@ -41,6 +41,16 @@ def load_cardio_model():
 def startup():
     load_cardio_model()
 
+@app.get("/")
+def root():
+    return {
+        "status": "online",
+        "service": "Cardio-AI Cardiac MRI Inference API",
+        "model_loaded": CARDIO_MODEL is not None,
+        "docs": "/docs",
+        "health": "/health"
+    }
+
 @app.get("/health")
 def health():
     return {
